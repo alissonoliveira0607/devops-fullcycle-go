@@ -32,7 +32,7 @@ make run
 ### Caso não queira utilizar o Make se baseie no conteúdo / comandos dentro dele para buildar e executar a aplicação.
 
 ## Link da imagem no registry do Dockerhub
-- [Imagem]("https://hub.docker.com/repository/docker/aoliveirasilva/fullcycle/general")
+- [Imagem](https://hub.docker.com/repository/docker/aoliveirasilva/fullcycle/general)
 
 ### Para realizar o download da imagem execute:
 
