@@ -1,23 +1,19 @@
 FROM golang:1.20-alpine AS builder
 
 WORKDIR /app
-
-# Desabilita os módulos Go
+# Desabilita os módulos do Go
 ENV GO111MODULE=off
 
-COPY . .
+COPY main.go .
 
-# Construindo o binario da aplicação
-RUN go build -o main .
+# Compilando o binário do Go de forma estática
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w" -o main .
 
-# Criando a imagem final mínima baseado em alpine
-FROM alpine:latest
-
-# Defininindo o diretório de trabalho para o container final
-WORKDIR /app/
+# Etapa 2: Criar a imagem final mínima
+FROM scratch
 
 # Copia o binário gerado da fase de build
-COPY --from=builder /app/main .
+COPY --from=builder /app/main /main
 
-CMD ["./main"]
+CMD ["/main"]
 
